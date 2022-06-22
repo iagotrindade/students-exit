@@ -15,9 +15,10 @@
                 <div class="add-student-modal">
                     <h3 class="add-form-header">Preencha os campos</h3>
                     <div class="add-student-form-area">
-                        <form class="add-student-form" method="POST" action="add.php">
+                        <form class="add-student-form" method="POST" action="<?=$base;?>/add">
                             <input type="text" name="group" placeholder="Turma:">
                             <input type="text" name="student_name" placeholder="Nome do Aluno:">
+                            <input type="number" name="student_number" placeholder="Número do Aluno:">
         
                             <div class="add-student-form-buttons">
                                 <button class="add-button-submit" type="submit">Adicionar</button>
