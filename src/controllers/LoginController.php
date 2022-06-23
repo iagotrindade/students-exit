@@ -21,7 +21,7 @@ class LoginController extends Controller {
         $surname = filter_input(INPUT_POST, 'surname');
         $password = filter_input(INPUT_POST, 'password');
 
-        if($userName && $password) {
+        if($surname && $password) {
             $token = LoginHandler::verifyLogin($surname, $password);
             if($token) {
                 $_SESSION['token'] = $token;
@@ -68,5 +68,11 @@ class LoginController extends Controller {
         else {
             $this->redirect('/cadastro');
         }
+    }
+
+    public function logout () {
+        $_SESSION['token'] = '';
+
+        $this->redirect('/login');
     }
 }

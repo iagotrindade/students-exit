@@ -1,4 +1,4 @@
-<?=$render('header',['loggedUser'=>$loggedUser]);?>
+<?=$render('header',['loggedUser'=>$loggedUser, 'students' => $students]);?>
 
     <section class="home">
         <!--for demo wrap-->
@@ -17,7 +17,8 @@
                     <div class="add-student-form-area">
                         <form class="add-student-form" method="POST" action="<?=$base;?>/add">
                             <input type="text" name="group" placeholder="Turma:">
-                            <input type="text" name="student-name" placeholder="Nome do Aluno:">
+                            <input type="text" name="student_name" placeholder="Nome do Aluno:">
+                            <input type="number" name="student_number" placeholder="Número do Aluno:">
         
                             <div class="add-student-form-buttons">
                                 <button class="add-button-submit" type="submit">Adicionar</button>
@@ -47,42 +48,27 @@
             <table cellpadding="0" cellspacing="0" border="0">
                 <tbody>
                     <tr>
-                        <td>01</td>
-                        <td>301</td>
-                        <td>Fulaninho de Tal</td>
-                        <td>1º (Primeiro)</td>
-                        <td>
-                            <div class="section-action-buttons">
-                                <a href="#" class="action-button">
-                                    <p>Retorno</p> <i class='bx bx-check act-icon'></i>
-                                </a>
+                        <?php foreach($students as $student): ?>
+                            <td><?=$student['name']?></td>
+                            <td>301</td>
+                            <td>Fulaninho de Tal</td>
+                            <td>1º (Primeiro)</td>
+                            <td>
+                                <div class="section-action-buttons">
+                                    <a href="#" class="action-button">
+                                        <p>Retorno</p> <i class='bx bx-check act-icon'></i>
+                                    </a>
 
-                                /
+                                    /
 
-                                <a href="#" class="action-button">
-                                    <p>Excluir</p> <i class='bx bx-x act-icon'></i>
-                                </a>
-                            </div>
-                        </td>
-
-                        <tr>
-                        <td>02</td>
-                        <td>302</td>
-                        <td>Ciclaninho de Tal</td>
-                        <td>2º (Segundo)</td>
-                        <td>
-                            <div class="section-action-buttons">
-                                <a href="#" class="action-button">
-                                    <p>Retorno</p> <i class='bx bx-check act-icon'></i>
-                                </a>
-
-                                /
-
-                                <a href="#" class="action-button">
-                                    <p>Excluir</p> <i class='bx bx-x act-icon'></i>
-                                </a>
-                            </div>
-                        </td>
+                                    <a href="#" class="action-button">
+                                        <p>Excluir</p> <i class='bx bx-x act-icon'></i>
+                                    </a>
+                                </div>
+                            </td>
+                        <?php endforeach?>
+                        
+                    <tr>
                 </tbody>
             </table>
         </div>

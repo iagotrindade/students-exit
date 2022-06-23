@@ -33,10 +33,7 @@ class LoginHandler {
             if(password_verify($password, $user['password'])) {
                 $token = md5(time().rand(0,9999).time());
 
-                User::update()
-                    ->set('token', $token)
-                    ->where('surname', $surname)
-                ->execute();
+                User::update()->set('token', $token)->where('surname', $surname)->execute();
 
                 return $token;
             }
@@ -61,7 +58,7 @@ class LoginHandler {
             'email' => $email,
             'matter' => $matter,
             'password' => $hash,
-            'token' => $token,
+            'token' => $token
         ])->execute();
 
         return $token;

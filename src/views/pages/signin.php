@@ -30,7 +30,7 @@
                                    <p><?php echo ($flash)?></p>
                                 </div>
                             <?php endif; ?>
-                            <input type="text" name="user-name" placeholder="Nome de Usuário:">
+                            <input type="text" name="surname" placeholder="Nome de Usuário:">
                             <input type="password" name="password" placeholder="Senha:">
         
                             <div class="login-form-buttons">

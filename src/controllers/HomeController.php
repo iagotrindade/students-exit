@@ -3,6 +3,7 @@ namespace src\controllers;
 
 use \core\Controller;
 use \src\handlers\LoginHandler;
+use \src\handlers\StudentHandler;
 
 class HomeController extends Controller {
     private $loggedUser;
@@ -16,8 +17,11 @@ class HomeController extends Controller {
     }
 
     public function index() {
+        $students [] = StudentHandler::getStudents();
+
         $this->render('home', [
-            'loggedUser' => $this->loggedUser
+            'loggedUser' => $this->loggedUser,
+            'students' => $students
         ]);
     }
 }
