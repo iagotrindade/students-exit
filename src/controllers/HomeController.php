@@ -17,11 +17,27 @@ class HomeController extends Controller {
     }
 
     public function index() {
-        $students [] = StudentHandler::getStudents();
+
+        $flashSuccess = '';
+        $flashError = '';
+
+        if(!empty($_SESSION['flashSuccess'])) {
+            $flashSuccess = $_SESSION['flashSuccess'];
+            $_SESSION['flashSuccess'] = '';
+        }   
+
+        else if(!empty($_SESSION['flashError'])) {
+            $flashError = $_SESSION['flashError'];
+            $_SESSION['flashError'] = '';
+        }   
+
+        $students = StudentHandler::getStudents();
 
         $this->render('home', [
             'loggedUser' => $this->loggedUser,
-            'students' => $students
+            'students' => $students,
+            'flashSuccess' => $flashSuccess,
+            'flashError' => $flashError
         ]);
     }
 }

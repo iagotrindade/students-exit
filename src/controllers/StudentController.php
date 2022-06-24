@@ -14,21 +14,46 @@ class StudentController extends Controller {
             if (StudentHandler::studentExists($studentNumber) === false) {
                 StudentHandler::addStudent($group, $studentName, $studentNumber);
 
-                $_SESSION['flash'] = 'Saída cadastrada com sucesso!';
+                $_SESSION['flashSuccess'] = 'Saída cadastrada com sucesso!';
                 $this->redirect('/');
             }
 
             else {
                 StudentHandler::addExit($group, $studentName, $studentNumber);
 
-                $_SESSION['flash'] = 'Saída cadastrada com sucesso!';
+                $_SESSION['flashSuccess'] = 'Saída cadastrada com sucesso!';
                 $this->redirect('/');
             }  
         }
 
         else {
-            $_SESSION['flash'] = 'Ops, ocorreu um problema, tente novamente!';
+            $_SESSION['flashError'] = 'Ops, ocorreu um problema, tente novamente!';
                 $this->redirect('/');
         }
+    }
+
+    public function studentreturn ($id) {
+        StudentHandler::changeSituation($id);
+
+        $_SESSION['flashSuccess'] = 'Situação do aluno atualizada com sucesso';
+        $this->redirect('/');
+
+    }
+
+    public function delete ($id) {
+        if ($id) {
+            StudentHandler::deleteStudent($id);
+
+            $_SESSION['flashSuccess'] = "Aluno excluído com sucesso!";
+
+            $this->redirect('/');
+        }
+
+        else {
+            $_SESSION['flashError'] = 'Ops, ocorreu um problema, tente novamente!';
+
+            $this->redirect('/');
+        }
+            
     }
 }

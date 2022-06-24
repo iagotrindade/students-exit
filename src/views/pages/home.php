@@ -1,7 +1,6 @@
 <?=$render('header',['loggedUser'=>$loggedUser, 'students' => $students]);?>
 
     <section class="home">
-        <!--for demo wrap-->
         <h1>Saídas dos Alunos</h1>
         
         <div class="add-student-button">
@@ -16,7 +15,7 @@
                     <h3 class="add-form-header">Preencha os campos</h3>
                     <div class="add-student-form-area">
                         <form class="add-student-form" method="POST" action="<?=$base;?>/add">
-                            <input type="text" name="group" placeholder="Turma:">
+                            <input type="number" name="group" placeholder="Turma:">
                             <input type="text" name="student_name" placeholder="Nome do Aluno:">
                             <input type="number" name="student_number" placeholder="Número do Aluno:">
         
@@ -29,16 +28,26 @@
                 </div>
             </section>
         </div>
+        <?php if(!empty($flashSuccess)): ?>
+            <div class="home-warning-success">
+                <p><?php echo ($flashSuccess)?></p>
+            </div>
+        <?php endif; ?>
 
+        <?php if(!empty($flashError)): ?>
+            <div class="home-warning-error">
+                <p><?php echo ($flashError)?></p>
+            </div>
+        <?php endif; ?>
         <div class="tbl-header">
             <table cellpadding="0" cellspacing="0" border="0">
             <thead>
-                <tr>
-                <th>#</th>
-                <th>Turma</th>
-                <th>Aluno</th>
-                <th>Período</th>
-                <th>Ações</th>
+                <tr>      
+                    <th>Turma</th>
+                    <th>Aluno</th>
+                    <th>Período</th>
+                    <th>Situação</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             </table>
@@ -47,28 +56,27 @@
         <div class="tbl-content">
             <table cellpadding="0" cellspacing="0" border="0">
                 <tbody>
-                    <tr>
-                        <?php foreach($students as $student): ?>
-                            <td><?=$student['name']?></td>
-                            <td>301</td>
-                            <td>Fulaninho de Tal</td>
-                            <td>1º (Primeiro)</td>
+                    <?php foreach($students as $student): ?>
+                        <tr>
+                            <td><?=$student->groupNumber?></td>
+                            <td><?=$student->name?></td>
+                            <td><?=$student->outPeriod?></td>
+                            <td><?=$student->situation?></td>
                             <td>
                                 <div class="section-action-buttons">
-                                    <a href="#" class="action-button">
+                                    <a href="<?=$base;?>/<?=$student->id?>/return" class="action-button">
                                         <p>Retorno</p> <i class='bx bx-check act-icon'></i>
                                     </a>
 
                                     /
 
-                                    <a href="#" class="action-button">
+                                    <a href="<?=$base;?>/<?=$student->id?>/delete" class="action-button">
                                         <p>Excluir</p> <i class='bx bx-x act-icon'></i>
                                     </a>
                                 </div>
                             </td>
-                        <?php endforeach?>
-                        
-                    <tr>
+                        <tr>
+                    <?php endforeach?>
                 </tbody>
             </table>
         </div>

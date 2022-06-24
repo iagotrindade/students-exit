@@ -31,7 +31,7 @@ body {
 
 /*Login CSS*/
 
-.warning {
+.warning, .home-warning-success, .home-warning-error  {
     display: flex;
     align-items: center;
     margin: 10px;
@@ -42,6 +42,17 @@ body {
     color: #fff;
 }
 
+.home-warning-success {
+    margin: 0;
+    margin-bottom: 10px;
+    background-color: green ;
+}
+
+.home-warning-error {
+    margin: 0;
+    margin-bottom: 10px;
+    background-color: red ;
+}
 
 .login-section {
     display: flex;

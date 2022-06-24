@@ -16,3 +16,8 @@ $router->get('/cadastro', 'LoginController@signup');
 $router->post('/cadastro', 'LoginController@signupAction');
 
 $router->post('/add', 'StudentController@newstudent');
+
+$router->get('/{id}/return', 'StudentController@studentreturn');
+
+
+$router->get('/{id}/delete', 'StudentController@delete');
