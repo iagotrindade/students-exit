@@ -6,20 +6,21 @@ use \src\handlers\StudentHandler;
 
 class StudentController extends Controller {
     public function newstudent () {
-        $group = filter_input(INPUT_POST, 'group');
+        $class = filter_input(INPUT_POST, 'class');
         $studentName = filter_input(INPUT_POST, 'student_name');
         $studentNumber = filter_input(INPUT_POST, 'student_number');
 
-        if ($group && $studentName && $studentNumber) {
-            if (StudentHandler::studentExists($studentNumber) === false) {
-                StudentHandler::addStudent($group, $studentName, $studentNumber);
+        if ($class && $studentName && $studentNumber) {
+            if (StudentHandler::studentExists($studentNumber, $class) === false) {
+
+                StudentHandler::addStudent($class, $studentName, $studentNumber);
 
                 $_SESSION['flashSuccess'] = 'Saída cadastrada com sucesso!';
                 $this->redirect('/');
             }
 
             else {
-                StudentHandler::addExit($group, $studentName, $studentNumber);
+                StudentHandler::addExit($studentNumber);
 
                 $_SESSION['flashSuccess'] = 'Saída cadastrada com sucesso!';
                 $this->redirect('/');
@@ -33,25 +34,44 @@ class StudentController extends Controller {
     }
 
     public function studentreturn ($id) {
-        StudentHandler::changeSituation($id);
-
-        $_SESSION['flashSuccess'] = 'Situação do aluno atualizada com sucesso';
-        $this->redirect('/');
-
-    }
-
-    public function delete ($id) {
         if ($id) {
-            StudentHandler::deleteStudent($id);
+            $situation = StudentHandler::changeSituation($id);
+            if ($situation === true) {
+                $_SESSION['flashSuccess'] = 'Situação do aluno atualizada com sucesso';
+                $this->redirect('/');
+            }
 
-            $_SESSION['flashSuccess'] = "Aluno excluído com sucesso!";
-
-            $this->redirect('/');
+            else {
+                $_SESSION['flashError'] = 'Ops, ocorreu um problema, tente novamente!';
+                $this->redirect('/');
+            }
         }
 
         else {
             $_SESSION['flashError'] = 'Ops, ocorreu um problema, tente novamente!';
+                $this->redirect('/');
+        }
+    }
 
+    public function delete ($id) {
+        if ($id) {
+            $deleteSituation = StudentHandler::deleteStudent($id);
+
+            if ($deleteSituation === true) {
+                $_SESSION['flashSuccess'] = "Aluno excluído com sucesso!";
+                $this->redirect('/');
+            }
+
+            else {
+                $_SESSION['flashError'] = 'Ops, ocorreu um problema, tente novamente!';
+                $this->redirect('/');
+            }
+
+            
+        }
+
+        else {
+            $_SESSION['flashError'] = 'Ops, ocorreu um problema, tente novamente!';
             $this->redirect('/');
         }
             

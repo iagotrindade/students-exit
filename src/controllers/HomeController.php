@@ -4,6 +4,7 @@ namespace src\controllers;
 use \core\Controller;
 use \src\handlers\LoginHandler;
 use \src\handlers\StudentHandler;
+use \src\handlers\ClassroomHandler;
 
 class HomeController extends Controller {
     private $loggedUser;
@@ -31,13 +32,17 @@ class HomeController extends Controller {
             $_SESSION['flashError'] = '';
         }   
 
-        $students = StudentHandler::getStudents();
+        $classes = ClassroomHandler::getClasses ();
+        
+
+        $students = StudentHandler::getStudents ();
 
         $this->render('home', [
             'loggedUser' => $this->loggedUser,
             'students' => $students,
             'flashSuccess' => $flashSuccess,
-            'flashError' => $flashError
+            'flashError' => $flashError,
+            'classes' => $classes
         ]);
     }
 }

@@ -2,17 +2,23 @@
 namespace src\handlers;
 
 use \src\models\Student;
+use \src\models\Classroom;
+
+use \src\controllers\SearchController;
 
 class StudentHandler {
     
-    public static function studentExists ($studentNumber) {
+    public static function studentExists ($studentNumber, $class) {
+
         $student = Student::select()->where('student_number', $studentNumber)->one();
 
+
+        
         return $student ? true : false;
     }
 
-    public static function addStudent ($group, $studentName, $studentNumber) {
-        if ($group && $studentName && $studentNumber) {
+    public static function addStudent ($class, $studentName, $studentNumber) {
+        if ($class && $studentName && $studentNumber) {
 
             $outPeriod = date('H:i:s');
 
@@ -70,8 +76,6 @@ class StudentHandler {
             $nightPeriod5F = mktime(22,14,59);
 
 
-            $situationOut = 'Fora de sala';
-
             if(strtotime($outPeriod) >= $morningPeriod1S && strtotime($outPeriod) <= $morningPeriod1F || strtotime($outPeriod) >= $afternoonPeriod1S && strtotime($outPeriod) <= $afternoonPeriod1F || strtotime($outPeriod) >= $nightPeriod1S && strtotime($outPeriod) <= $nightPeriod1F) {
                 $outPeriod = "1º Periodo";
             }
@@ -97,19 +101,69 @@ class StudentHandler {
             }
             
 
+            $situationOut = 'Saída para o banheiro';
 
             Student::insert([
-                'group_number' => $group,
+                'class_code' => $class,
                 'name' => $studentName,
                 'student_number' => $studentNumber,
                 'out_period' => $outPeriod,
                 'situation' => $situationOut
             ])->execute();
+            
+            $classExist = Classroom::select()->where('code', $class)->one();
+
+            if (empty($classExist)) {
+                Classroom::insert([
+                    'code' => $class
+                ])->execute();
+            }
+            
+            
         }
     }
 
+    public static function addExit ($studentNumber) {
+        if ($studentNumber) {
+            $situationOut = 'Saída para o banheiro';
+            $student = Student::update()
+                ->set('situation', $situationOut)
+                ->where('student_number', $studentNumber)
+            ->execute();
+
+        }
+    }
+
+    public static function changeSituation ($id) {
+        if ($id) {
+            $situationIn = 'Dentro de sala';
+            Student::update()
+                ->set('situation', $situationIn)
+                ->where('id', $id)
+            ->execute();
+
+            return true;
+        }
+        
+        else {
+            return false;
+        }
+    }
+
+    public static function deleteStudent ($id) {
+        if ($id) {
+            Student::delete()->where('id', $id )->execute();
+            return true;
+        }
+
+        else {
+            return false;
+        }
+        
+    }
+
     public static function getStudents () {
-        $studentsList = Student::select()->where('situation', 'Fora de sala' )->get();
+        $studentsList = Student::select()->where('situation', 'Saída para o banheiro' )->get();
         
         $students = [];
 
@@ -118,7 +172,7 @@ class StudentHandler {
             $newStudent->id = $student['id'];
             $newStudent->name = $student['name'];
             $newStudent->studentNumber = $student['student_number']; 
-            $newStudent->groupNumber = $student['group_number']; 
+            $newStudent->classNumber = $student['class_code']; 
             $newStudent->outPeriod = $student['out_period']; 
             $newStudent->situation = $student['situation']; 
 
@@ -127,13 +181,44 @@ class StudentHandler {
         return $students;
     }
 
-    public static function changeSituation ($id) {
-        $situationIn = 'Dentro de sala';
-        Student::update()->set('situation', $situationIn)->where('id', $id)->execute();
+    public static function getStudentsByClass ($class) {
+        $studentsList = Student::select()->where('class_code', $class )->get();
+        
+        $students = [];
 
+        foreach($studentsList as $student) {
+            $newStudent = new Student();
+            $newStudent->id = $student['id'];
+            $newStudent->name = $student['name'];
+            $newStudent->studentNumber = $student['student_number']; 
+            $newStudent->classNumber = $student['class_code']; 
+            $newStudent->outPeriod = $student['out_period']; 
+            $newStudent->situation = $student['situation']; 
+
+            $students[] = $newStudent;
+        }
+        return $students;
     }
 
-    public static function deleteStudent ($id) {
-        Student::delete()->where('id', $id )->execute();
-    }
+    public static function searchStudents ($term) {
+
+        $students = [];
+        $data = Student::select()->where('name', 'like', '%'.$term.'%')->get();
+
+        if ($data) {
+            foreach($data as $student) {
+                $newStudent = new Student();
+                $newStudent->id = $student['id'];
+                $newStudent->name = $student['name'];
+                $newStudent->studentNumber = $student['student_number']; 
+                $newStudent->classNumber = $student['class_code']; 
+                $newStudent->outPeriod = $student['out_period']; 
+                $newStudent->situation = $student['situation'];
+
+                $students[] = $newStudent;
+            }
+        }
+
+        return $students;
+    }   
 }

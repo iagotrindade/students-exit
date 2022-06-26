@@ -1,4 +1,4 @@
-<?=$render('header',['loggedUser'=>$loggedUser, 'students' => $students, 'classes' => $classes]);?>
+<?=$render('header',['loggedUser'=>$loggedUser, 'students' => $students, 'classes' => $classes, 'filterClass' => $filterClass]);?>
 
     <section class="home">
         <h1>Saídas dos Alunos</h1>
@@ -50,16 +50,19 @@
         <?php endif; ?>
         <div class="tbl-header">
             <table cellpadding="0" cellspacing="0" border="0">
-            <thead>
-                <tr>      
-                    <th>Turma</th>
-                    <th>Aluno</th>
-                    <th>Período</th>
-                    <th>Situação</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
+                <thead>
+                    <tr>      
+                        <th>Turma</th>
+                        <th>Aluno</th>
+                        <th>Período</th>
+                        <th>Situação</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
             </table>
+            <p class = 'search-term'>
+                Você filtrou por: <?=$filterClass?>
+            </p>
         </div>
 
         <div class="tbl-content">

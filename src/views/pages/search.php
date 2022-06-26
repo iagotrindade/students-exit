@@ -1,4 +1,4 @@
-<?=$render('header',['loggedUser'=>$loggedUser, 'students' => $students, 'classes' => $classes]);?>
+<?=$render('header',['loggedUser'=>$loggedUser, 'searchTerm'=>$searchTerm , 'students'=>$students, 'flashSuccess'=>$_SESSION['flashSuccess'], 'flashError'=>$_SESSION['flashError'], 'classes' => $classes]);?>
 
     <section class="home">
         <h1>Saídas dos Alunos</h1>
@@ -37,29 +37,33 @@
         </div>
         <?php if(!empty($flashSuccess)): ?>
             <div class="home-warning-success">
-                <p><?php echo ($flashSuccess)?></p>
+                <p><?php echo ($_SESSION['flashSuccess'])?></p>
                 <i class='bx bx-x-circle close-warning' style = "font-size: 25px;" onclick="closeWarning()"></i>
             </div>
         <?php endif; ?>
 
         <?php if(!empty($flashError)): ?>
             <div class="home-warning-error">
-                <p><?php echo ($flashError)?></p>
+                <p><?php echo ($_SESSION['flashError'])?></p>
                 <i class='bx bx-x-circle close-warning' style = "font-size: 25px;" onclick="closeWarning()"></i>
             </div>
         <?php endif; ?>
+        
         <div class="tbl-header">
             <table cellpadding="0" cellspacing="0" border="0">
-            <thead>
-                <tr>      
-                    <th>Turma</th>
-                    <th>Aluno</th>
-                    <th>Período</th>
-                    <th>Situação</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
+                <thead>
+                    <tr>      
+                        <th>Turma</th>
+                        <th>Aluno</th>
+                        <th>Período</th>
+                        <th>Situação</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
             </table>
+            <p class = 'search-term'>
+                Você procurou por: <?=$searchTerm?>
+            </p>
         </div>
 
         <div class="tbl-content">
@@ -76,7 +80,7 @@
                                     <a href="<?=$base;?>/<?=$student->id?>/return" class="action-button">
                                         <p>Retorno</p> <i class='bx bx-check act-icon'></i>
                                     </a>
-
+                                    
                                     /
 
                                     <a href="<?=$base;?>/<?=$student->id?>/delete" class="action-button">
@@ -92,14 +96,13 @@
     </section>
 
     <script>
-         setTimeout (() => {
+        setTimeout (() => {
             document.querySelector('.home-warning-success').style.display = 'none';
-        }, 3000);
+        }, 3000)    
 
         setTimeout (() => {
             document.querySelector('.home-warning-error').style.display = 'none';
-        }, 3000);
-        
+        }, 3000)    
         const body = document.querySelector('body'),
         sidebar = body.querySelector('nav'),
         toggle = body.querySelector(".toggle"),
