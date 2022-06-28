@@ -1,4 +1,4 @@
-<?=$render('header',['loggedUser'=>$loggedUser, 'searchTerm'=>$searchTerm , 'students'=>$students, 'flashSuccess'=>$_SESSION['flashSuccess'], 'flashError'=>$_SESSION['flashError'], 'classes' => $classes]);?>
+<?=$render('header',['loggedUser'=>$loggedUser, 'searchTerm'=>$searchTerm , 'students'=>$students, 'flashSuccess'=>$_SESSION['flashSuccess'], 'flashError'=> $_SESSION['flashError'], 'classes' => $classes]);?>
 
     <section class="home">
         <h1>Saídas dos Alunos</h1>

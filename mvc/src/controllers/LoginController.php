@@ -75,4 +75,8 @@ class LoginController extends Controller {
 
         $this->redirect('/login');
     }
+
+    public function recover () {
+        $this->render('/recover');
+    }
 }

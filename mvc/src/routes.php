@@ -15,6 +15,8 @@ $router->get('/cadastro', 'LoginController@signup');
 
 $router->post('/cadastro', 'LoginController@signupAction');
 
+$router->get('/recover', 'LoginController@recover');
+
 $router->get('/search', 'SearchController@index');
 
 $router->post('/filter', 'FilterController@index');
