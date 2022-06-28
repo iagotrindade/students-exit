@@ -36,6 +36,11 @@
                             <div class="login-form-buttons">
                                 <button class="login-button-submit" style="margin:10px;" type="submit">Login</button>
                             </div>
+
+                            <div class="create-account-link">
+                                <p>Esqueceu sua senha? <a href="recover">Clique aqui!</a></p>
+                            </div>
+
                             <div class="create-account-link">
                                 <p>Não possui conta? <a href="cadastro">Cadastre-se!</a></p>
                             </div>
