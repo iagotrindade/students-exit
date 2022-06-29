@@ -23,40 +23,40 @@ class StudentHandler {
             $outPeriod = date('H:i:s');
 
             //Morning Periods
-            $morningPeriod1S = date('H:i:s', strtotime('07:30:00'));
-            $morningPeriod1F = date('H:i:s', strtotime('08:19:59'));
+            $morningPeriod1S = mktime(7,30,00);
+            $morningPeriod1F = mktime(8,19,59);
 
-            $morningPeriod2S = date('H:i:s', strtotime('08:20:00'));
-            $morningPeriod2F = date('H:i:s', strtotime('09:09:59'));
+            $morningPeriod2S = mktime(8,20,00);
+            $morningPeriod2F = mktime(9,9,59);
 
-            $morningPeriod3S = date('H:i:s', strtotime('09:10:00'));
-            $morningPeriod3F = date('H:i:s', strtotime('09:59:59'));
+            $morningPeriod3S = mktime(9,10,00);
+            $morningPeriod3F = mktime(9,59,59);
 
-            $morningPeriod4S = date('H:i:s', strtotime('10:00:00'));
-            $morningPeriod4F = date('H:i:s', strtotime('10:49:59'));
+            $morningPeriod4S = mktime(10,00,00);
+            $morningPeriod4F = mktime(10,49,59);
 
-            $morningPeriod5S = date('H:i:s', strtotime('10:50:00'));
-            $morningPeriod5F = date('H:i:s', strtotime('11:39:59'));
+            $morningPeriod5S = mktime(10,50,00);
+            $morningPeriod5F = mktime(11,39,59);
 
-            $morningPeriod6S = date('H:i:s', strtotime('11:40:00'));
-            $morningPeriod6F = date('H:i:s', strtotime('12:29:59'));
+            $morningPeriod6S = mktime(11,40,00);
+            $morningPeriod6F = mktime(12,30,00);
 
 
             //Afternoon periods
-            $afternoonPeriod1S = date('H:i:s', strtotime('13:00:00'));
-            $afternoonPeriod1F = date('H:i:s', strtotime('13:49:59'));
+            $afternoonPeriod1S = mktime(13,00,00);
+            $afternoonPeriod1F = mktime(13,49,59);
 
-            $afternoonPeriod2S = date('H:i:s', strtotime('13:50:00'));
-            $afternoonPeriod2F = date('H:i:s', strtotime('14:39:59'));
+            $afternoonPeriod2S = mktime(13,50,00);
+            $afternoonPeriod2F = mktime(14,39,59);
 
-            $afternoonPeriod3S = date('H:i:s', strtotime('14:40:00'));
-            $afternoonPeriod3F = date('H:i:s', strtotime('15:29:59'));
+            $afternoonPeriod3S = mktime(14,40,00);
+            $afternoonPeriod3F = mktime(15,30,00);
 
-            $afternoonPeriod4S = date('H:i:s', strtotime('15:30:00'));
-            $afternoonPeriod4F = date('H:i:s', strtotime('16:19:59'));
+            $afternoonPeriod4S = mktime(15,30,00);
+            $afternoonPeriod4F = mktime(16,19,59);
 
-            $afternoonPeriod5S = date('H:i:s', strtotime('16:20:00'));
-            $afternoonPeriod5F = date('H:i:s', strtotime('17:09:59'));
+            $afternoonPeriod5S = mktime(16,20,00);
+            $afternoonPeriod5F = mktime(17,10,00);
 
             
             //Night periods
@@ -76,8 +76,8 @@ class StudentHandler {
             $nightPeriod5F = mktime(22,14,59);
 
 
-            if(strtotime($outPeriod) >= $morningPeriod1S && strtotime($outPeriod) <= $morningPeriod1F || strtotime($outPeriod) >= $afternoonPeriod1S && strtotime($outPeriod) <= $afternoonPeriod1F || strtotime($outPeriod) >= $nightPeriod1S && strtotime($outPeriod) <= $nightPeriod1F) {
-                $outPeriod = "1º Periodo";
+            if (strtotime($outPeriod) >= $morningPeriod1S && strtotime($outPeriod) <= $morningPeriod1F || strtotime($outPeriod) >= $afternoonPeriod1S && strtotime($outPeriod) <= $afternoonPeriod1F || strtotime($outPeriod) >= $nightPeriod1S && strtotime($outPeriod) <= $nightPeriod1F) {
+                $outPeriod = '1º Periodo';
             }
 
             else if (strtotime($outPeriod) >= $morningPeriod2S && strtotime($outPeriod) <= $morningPeriod2F || strtotime($outPeriod) >= $afternoonPeriod2S && strtotime($outPeriod) <= $afternoonPeriod2F || strtotime($outPeriod) >= $nightPeriod2S && strtotime($outPeriod) <= $nightPeriod2F) {

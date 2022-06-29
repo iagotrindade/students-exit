@@ -63,4 +63,8 @@ class LoginHandler {
 
         return $token;
     }
+
+    public static function updateToken ($email, $token) {
+        User::update()->set('token', $token)->where('email', $email)->execute();
+    }
 }

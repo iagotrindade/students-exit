@@ -75,4 +75,41 @@ class LoginController extends Controller {
 
         $this->redirect('/login');
     }
+
+    public function recover () {
+       
+        
+        $this->render('recover');
+        $_SESSION['flash'] = '';
+    }
+
+    public function recoverAction () {
+        $email = filter_input(INPUT_POST, 'email');
+
+        if ($email) {
+            if (LoginHandler::emailExists($email)) {
+                $warningSuccess = 'Tudo certo! Acesse seu E-mail e recupere sua senha :)';
+
+                $token = md5(time().rand(0,9999).time());
+
+                LoginHandler::updateToken($email, $token);
+
+                $_SESSION['flashSuccess'] = 'Mensagem enviada!';
+
+                $this->render('recover', [
+                    'warningSuccess' => $warningSuccess
+                ]);
+            }
+
+            else {
+                $_SESSION['flash'] = 'E-mail não cadastrado';
+                
+                $this->redirect('/recover', [
+                    'flash' => $_SESSION['flash']
+                ]);
+            }
+        }
+        
+
+    }
 }
