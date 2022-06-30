@@ -88,15 +88,15 @@ class LoginController extends Controller {
 
         if ($email) {
             if (LoginHandler::emailExists($email)) {
-                $warningSuccess = 'Tudo certo! Acesse seu E-mail e recupere sua senha :)';
 
                 $token = md5(time().rand(0,9999).time());
 
                 $this->user = LoginHandler::recoverPassword($email, $token);
 
-                $_SESSION['flashSuccess'] = 'Mensagem enviada!';
+                $_SESSION['flashSuccess'] = 'E-mail enviado!';
 
                 $this->render('recover', [
+                    'email' => $email,
                     'warningSuccess' => $_SESSION['flashSuccess'],
                     'user' => $this->user
                 ]);

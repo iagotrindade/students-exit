@@ -22,15 +22,6 @@
             <section class="login-modal-area" style="margin: 0; margin-bottom: 10px">
                 <div class="login-modal">
                     <h2 class="login-form-header">Recupere sua senha</h2>
-                    <p class="recover-form-paragraph">
-                        <?php if (!empty($warningSuccess)) {
-                            echo ($warningSuccess);
-                        }
-                        else {
-                            echo ('Digite seu e-mail e enviaremos uma mensagem de recuperação para você!');
-                        }
-                        ?>
-                    </p>
 
                     <div class="login-form-area">
                         <form class="login-form" method="POST" action="<?=$base;?>/recover">
@@ -39,11 +30,13 @@
                                    <p><?php echo ($_SESSION['flash'])?></p>
                                 </div>
                             <?php endif; ?>
+                            
                             <?php if(!empty($_SESSION['flashSuccess'])): ?>
                                <div class="login-warning-success">
-                                   <p><?php echo ($_SESSION['flashSuccess'].' '. $user->name)?></p>
+                                   <p><?php echo ($_SESSION['flashSuccess'].' para '. $email)?></p>
                                 </div>
                             <?php endif; ?>
+                            
                             <input type="email" name="email" placeholder="E-mail:">
         
                             <div class="login-form-buttons">

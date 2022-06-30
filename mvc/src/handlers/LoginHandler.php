@@ -76,34 +76,25 @@ class LoginHandler {
                 $user->id = ($data['id']);
                 $user->name =($data['name']);
                 
-                return $user;
             }
 
             $recoverLink = 'http://localhost/students-exit/mvc/public/password_recover/token='.$token;
 
+            $para  = $email; 
+            $assunto  = 'Recuperação de senha!';
+            $corpo = "Olá ".$user->name.'.'."\r\n".
+            "Parece que você esqueceu sua senha de acesso do sistema de controle de alunos. Mas não tem problema!"."<br>".
+            "Clique no link abaixo para recuperar seu acesso :)"."<br><br>".
+            $recoverLink."<br><br><br>".
+            "Atenciosamente, Iago Trindade - Desenvolvedor"."<br>".
+            "Contato: (51) 991657516";
 
-            ini_set( 'display_errors', 1 );
-            error_reporting( E_ALL );
-            $from = "iagost1@hotmail.com";
-            $to = 'iago23st1@gmail.com';
-            $subject = "Alteração de senha!";
-            $message = "Olá" .' '. $user->name . '! Você solicitou uma troca de senha do sistema de controle de saída dos alunos, clique no link abaixo para recuperar sua senha <br>'.$recoverLink;
-            $headers = "From:" . $from;
-
-            mail($to,$subject,$message, $headers);
-
-            $recoverLink = 'http://localhost/students-exit/mvc/public/password_recover/token='.$token;
-
-		    $mensagem = "Clique no link para redefinir sua senha:<br/>".$recoverLink;
-
-		    $assunto = "Redefinição de senha";
-
-		    $headers = 'From: iagost1@hotmail.com'."\r\n" .
-				   'X-Mailer: PHP/'.phpversion();
-
-		    mail('iago23st1@gmail.com', $assunto, $mensagem, $headers);
-
-            
+            $headers = 'From: iagost1@hotmail.com' . "\r\n" .
+                        'Reply-To: iagost1@hotmail.com' . "\r\n" .
+                        'Content-type: text/html; charset=utf8' . "\r\n" .
+                        
+                        'X-Mailer: PHP/' . phpversion();
+            mail($para, $assunto, $corpo, $headers);
 
         }
     }
