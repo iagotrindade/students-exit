@@ -87,6 +87,12 @@ body {
     align-items: center;
 }
 
+.change-pass-form-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .login-form {
     display: flex;
     flex-direction: column;
@@ -549,7 +555,7 @@ section{
 .recover-form-paragraph {
     width: 395px;
     margin: 10px;
-    padding-left: 5px;
+    padding-left: 10px;
     color: #fff;
     text-align: left;
 }

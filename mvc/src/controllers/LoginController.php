@@ -77,10 +77,10 @@ class LoginController extends Controller {
     }
 
     public function recover () {
-       
-        
+    
         $this->render('recover');
         $_SESSION['flash'] = '';
+
     }
 
     public function recoverAction () {
@@ -90,12 +90,12 @@ class LoginController extends Controller {
             if (LoginHandler::emailExists($email)) {
 
                 $token = md5(time().rand(0,9999).time());
-
+                
                 $this->user = LoginHandler::recoverPassword($email, $token);
 
                 $_SESSION['flashSuccess'] = 'E-mail enviado!';
 
-                $this->render('recover', [
+                $this->render('/recover', [
                     'email' => $email,
                     'warningSuccess' => $_SESSION['flashSuccess'],
                     'user' => $this->user
@@ -116,5 +116,32 @@ class LoginController extends Controller {
         }
         
 
+    }
+
+    public function passwordChange ($token) {
+
+        if (LoginHandler::tokenVerify($token) === true) {
+            $this->render('change_password');
+        }
+
+        else {
+            $_SESSION['flash'] = 'Token de acesso inválido, tente outra vez!';
+                
+                $this->redirect('/recover', [
+                    'flash' => $_SESSION['flash']
+                ]);
+
+                $_SESSION['flash'] = '';
+        }
+        
+        
+    }
+
+    public function updatePassword () {
+        $newPass = filter_input(INPUT_POST, 'password');
+
+        if (!empty($newPass)) {
+
+        }
     }
 }

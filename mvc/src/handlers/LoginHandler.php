@@ -44,10 +44,19 @@ class LoginHandler {
         }
     }
 
+
     public static function emailExists($email) {
         $user = User::select()->where('email', $email)->one();
         return $user ? true : false;
     }
+
+
+    public static function tokenVerify($token) {
+        $token = User::select()->where('token', $token)->one();
+        return $token ? true : false;
+    }
+
+
 
     public static function addUser($name, $surname, $email, $matter, $password) {
         $hash = password_hash($password, PASSWORD_DEFAULT);
@@ -64,6 +73,7 @@ class LoginHandler {
         return $token;
     }
 
+
     public static function recoverPassword ($email, $token) {
         if($email && $token) {
             User::update()->set('token', $token)->where('email', $email)->execute();
@@ -78,14 +88,15 @@ class LoginHandler {
                 
             }
 
-            $recoverLink = 'http://localhost/students-exit/mvc/public/password_recover/token='.$token;
+            $recoverLink = 'http://localhost/students-exit/mvc/public/token='.$token.'/recover';
+
 
             $para  = $email; 
             $assunto  = 'Recuperação de senha!';
             $corpo = "Olá ".$user->name.'.'."\r\n".
             "Parece que você esqueceu sua senha de acesso do sistema de controle de alunos. Mas não tem problema!"."<br>".
             "Clique no link abaixo para recuperar seu acesso :)"."<br><br>".
-            $recoverLink."<br><br><br>".
+            "<a href = " . $recoverLink . '>Recupere sua senha clicando aqui!</a></br></br>' .
             "Atenciosamente, Iago Trindade - Desenvolvedor"."<br>".
             "Contato: (51) 991657516";
 
@@ -95,7 +106,6 @@ class LoginHandler {
                         
                         'X-Mailer: PHP/' . phpversion();
             mail($para, $assunto, $corpo, $headers);
-
         }
     }
 }

@@ -1,5 +1,6 @@
 <?php
 use core\Router;
+use \src\controllers\LoginController;
 
 $router = new Router();
 
@@ -18,6 +19,10 @@ $router->post('/cadastro', 'LoginController@signupAction');
 $router->get('/recover', 'LoginController@recover');
 
 $router->post('/recover', 'LoginController@recoverAction');
+
+$router->get('/{token}={token}/recover', 'LoginController@passwordChange');
+
+$router->post('/recover', 'LoginController@updatePassword');
 
 $router->get('/search', 'SearchController@index');
 
