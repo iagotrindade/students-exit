@@ -24,7 +24,7 @@
                     <h2 class="login-form-header">Recupere sua senha</h2>
 
                     <div class="login-form-area">
-                        <form class="login-form" method="POST" action="<?=$base;?>/recover">
+                        <form class="login-form" method="POST" action="<?=$base;?>/send_mail">
                             <?php if(!empty($_SESSION['flash'])): ?>
                                <div class="warning">
                                    <p><?php echo ($_SESSION['flash'])?></p>

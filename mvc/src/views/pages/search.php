@@ -56,7 +56,7 @@
                         <th>Turma</th>
                         <th>Aluno</th>
                         <th>Período</th>
-                        <th>Situação</th>
+                        <th>Motivo</th>
                         <th>Ações</th>
                     </tr>
                 </thead>

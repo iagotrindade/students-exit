@@ -18,7 +18,7 @@ $router->post('/cadastro', 'LoginController@signupAction');
 
 $router->get('/recover', 'LoginController@recover');
 
-$router->post('/recover', 'LoginController@recoverAction');
+$router->post('/send_mail', 'LoginController@recoverAction');
 
 $router->get('/{token}={token}/recover', 'LoginController@passwordChange');
 

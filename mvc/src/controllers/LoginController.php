@@ -121,7 +121,11 @@ class LoginController extends Controller {
     public function passwordChange ($token) {
 
         if (LoginHandler::tokenVerify($token) === true) {
-            $this->render('change_password');
+            $_SESSION['token'] = $token;
+
+            $this->render('change_password', [
+                'token' => $_SESSION['token']
+            ]);
         }
 
         else {
@@ -138,10 +142,21 @@ class LoginController extends Controller {
     }
 
     public function updatePassword () {
+
         $newPass = filter_input(INPUT_POST, 'password');
+        $token = filter_input(INPUT_POST, 'token');
 
         if (!empty($newPass)) {
 
-        }
+            if(LoginHandler::updatePass($newPass, $token) === true)  {
+                $_SESSION['flashSuccess'] = 'Senha alterada com sucesso!';
+
+                $this->render('signin', [
+                    'flashSuccess' =>  $_SESSION['flashSuccess']
+                ]);
+
+                $_SESSION['flashSuccess'] = '';
+            };
+        }   
     }
 }

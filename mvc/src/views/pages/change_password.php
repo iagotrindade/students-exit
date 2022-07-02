@@ -38,7 +38,8 @@
                                 </div>
                             <?php endif; ?>
                             
-                            <input type="password" name="password" placeholder="Senha:">
+                            <input type="hidden" name="token" value = '<?=implode("", $_SESSION['token']);?>'>
+                            <input type="password" name="password" placeholder="Senha:" required>
         
                             <div class="login-form-buttons">
                                 <button class="login-button-submit" style="margin:10px;" type="submit">Enviar</button>

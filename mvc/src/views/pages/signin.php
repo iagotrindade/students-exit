@@ -30,6 +30,12 @@
                                    <p><?php echo ($flash)?></p>
                                 </div>
                             <?php endif; ?>
+
+                            <?php if(!empty($_SESSION['flashSuccess'])): ?>
+                               <div class="login-warning-success">
+                                   <p><?php echo ($_SESSION['flashSuccess'])?></p>
+                                </div>
+                            <?php endif; ?>
                             <input type="text" name="surname" placeholder="Nome de Usuário:">
                             <input type="password" name="password" placeholder="Senha:">
         

@@ -77,31 +77,31 @@ class StudentHandler {
 
 
             if (strtotime($outPeriod) >= $morningPeriod1S && strtotime($outPeriod) <= $morningPeriod1F || strtotime($outPeriod) >= $afternoonPeriod1S && strtotime($outPeriod) <= $afternoonPeriod1F || strtotime($outPeriod) >= $nightPeriod1S && strtotime($outPeriod) <= $nightPeriod1F) {
-                $outPeriod = '1º Periodo';
+                $outPeriod = '1º';
             }
 
             else if (strtotime($outPeriod) >= $morningPeriod2S && strtotime($outPeriod) <= $morningPeriod2F || strtotime($outPeriod) >= $afternoonPeriod2S && strtotime($outPeriod) <= $afternoonPeriod2F || strtotime($outPeriod) >= $nightPeriod2S && strtotime($outPeriod) <= $nightPeriod2F) {
-                $outPeriod = '2º Periodo';
+                $outPeriod = '2º';
             }
 
             else if (strtotime($outPeriod) >= $morningPeriod3S && strtotime($outPeriod) <= $morningPeriod3F || strtotime($outPeriod) >= $afternoonPeriod3S && strtotime($outPeriod) <= $afternoonPeriod3F || strtotime($outPeriod) >= $nightPeriod3S && strtotime($outPeriod) <= $nightPeriod3F) {
-                $outPeriod = '3º Periodo';
+                $outPeriod = '3º';
             }
 
             else if (strtotime($outPeriod) >= $morningPeriod4S && strtotime($outPeriod) <= $morningPeriod4F || strtotime($outPeriod) >= $afternoonPeriod4S && strtotime($outPeriod) <= $afternoonPeriod4F || strtotime($outPeriod) >= $nightPeriod4S && strtotime($outPeriod) <= $nightPeriod4F) {
-                $outPeriod = '4º Periodo';
+                $outPeriod = '4º';
             }
 
             else if (strtotime($outPeriod) >= $morningPeriod5S && strtotime($outPeriod) <= $morningPeriod5F || strtotime($outPeriod) >= $afternoonPeriod5S && strtotime($outPeriod) <= $afternoonPeriod5F || strtotime($outPeriod) >= $nightPeriod5S && strtotime($outPeriod) <= $nightPeriod5F) {
-                $outPeriod = '5º Periodo';
+                $outPeriod = '5º';
             }
 
             else if (strtotime($outPeriod) >= $morningPeriod6S && strtotime($outPeriod) <= $morningPeriod6F) {
-                $outPeriod = '6º Periodo';
+                $outPeriod = '6º';
             }
             
 
-            $situationOut = 'Saída para o banheiro';
+            $situationOut = 'Banheiro';
 
             Student::insert([
                 'class_code' => $class,
@@ -125,7 +125,7 @@ class StudentHandler {
 
     public static function addExit ($studentNumber) {
         if ($studentNumber) {
-            $situationOut = 'Saída para o banheiro';
+            $situationOut = 'Banheiro';
             $student = Student::update()
                 ->set('situation', $situationOut)
                 ->where('student_number', $studentNumber)
@@ -163,7 +163,7 @@ class StudentHandler {
     }
 
     public static function getStudents () {
-        $studentsList = Student::select()->where('situation', 'Saída para o banheiro' )->get();
+        $studentsList = Student::select()->where('situation', 'Banheiro' )->get();
         
         $students = [];
 
