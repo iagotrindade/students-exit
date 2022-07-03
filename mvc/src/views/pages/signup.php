@@ -24,6 +24,11 @@
                     <h2 class="login-form-header">Criar uma Conta</h2>
                     <div class="login-form-area">
                         <form class="login-form" method="POST" action="<?=$base;?>/cadastro">
+                            <?php if(!empty($flash)): ?>
+                                <div class="warning">
+                                   <p><?php echo ($flash)?></p>
+                                </div>
+                            <?php endif; ?>
                             <input type="text" name="name" placeholder="Nome Completo:">
                             <input type="text" name="surname" placeholder="Nome de Usuário (Apelido):">
                             <input type="text" name="email" placeholder="E-mail:">

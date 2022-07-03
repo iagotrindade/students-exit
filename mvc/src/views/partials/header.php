@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset = "UTF-8">
       
     <!----======== CSS ======== -->
     <link rel="stylesheet" href="<?=$base?>/assets/css/style.css">
@@ -11,7 +12,7 @@
     <!----===== Boxicons CSS ===== -->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
-    <title>Saída de Alunos</title>
+    <title>Controle de Saída de Alunos</title>
 </head>
 
 <body>
@@ -64,7 +65,7 @@
                     </li> -->
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="about">
                             <i class='bx bx-copyright icon'></i>
                             <span class="text nav-text">Sobre</span>
                         </a>

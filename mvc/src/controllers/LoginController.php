@@ -61,7 +61,12 @@ class LoginController extends Controller {
 
             else {
                 $_SESSION['flash'] = 'Usuário já cadastrado!';
-                $this->redirect('/cadastro');
+
+                $this->render('/signup', [
+                    "flash" => $_SESSION['flash']
+                ]);
+
+                $_SESSION['flash'] = '';
             }
         }
 

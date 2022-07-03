@@ -45,4 +45,10 @@ class HomeController extends Controller {
             'classes' => $classes
         ]);
     }
+
+    public function about () {
+        $this->render('about', [
+            'loggedUser' => $this->loggedUser
+        ]);
+    }
 }
