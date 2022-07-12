@@ -6,7 +6,7 @@
         <div class="section-area-add-student">
             <div class = "header-buttons">
                 <button class="add-button" onclick="openModal()">Adicionar</button>
-                <form method = "POST" name = 'filter-form' action = "<?=$base;?>/filter">
+                <form class = "filter-form" method = "POST" name = 'filter-form' action = "<?=$base;?>/filter">
                     <select class="add-button" name ="class-select">
                         <option selected disabled>Turmas</option>
                         <?php foreach($classes as $classe): ?>
@@ -73,13 +73,14 @@
                             <td><?=$student->situation?></td>
                             <td>
                                 <div class="section-action-buttons">
-                                    <a href="<?=$base;?>/<?=$student->id?>/return" class="action-button">
+                                    <!--Função removida a pedido do usuário-->
+                                    <!--<a href="<?=$base;?>/<?=$student->id?>/return" class="action-button">
                                         <p>Retorno</p> <i class='bx bx-check act-icon'></i>
                                     </a>
 
-                                    /
+                                    /-->
 
-                                    <a href="<?=$base;?>/<?=$student->id?>/delete" class="action-button">
+                                    <a href="<?=$base;?>/<?=$student->id?>/delete" class="action-button" onclick='return confirmDel()'>
                                         <p>Excluir</p> <i class='bx bx-x act-icon'></i>
                                     </a>
                                 </div>

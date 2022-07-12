@@ -1,6 +1,23 @@
 <?=$render('header',['loggedUser'=>$loggedUser]);?>
-
+    
     <section class="home" style = "display:flex; flex-direction:column; align-items:center;">
+        <section class="add-student-section" style="margin: 0; margin-bottom: 10px">
+            <div class="add-student-modal">
+                <h3 class="add-form-header">Preencha os campos</h3>
+                <div class="add-student-form-area">
+                    <form class="add-student-form" method="POST" action="<?=$base;?>/add">
+                        <input type="text" name="class" placeholder="Turma:">
+                        <input type="text" name="student_name" placeholder="Nome do Aluno:">
+                        <input type="number" name="student_number" placeholder="Número do Aluno:">
+
+                        <div class="add-student-form-buttons">
+                            <button class="add-button-submit" type="submit">Adicionar</button>
+                            <button class="add-button-close" onclick="closeModal()">Fechar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
         <h1>Sobre o desenvolvedor</h1>
         <div class = "section-area-about">
             <div class = "section-area-about-modal">
@@ -51,14 +68,15 @@
 
                         <li class = "list-about-item">
                             <div class = "list-about-spec">
-                                <i class='bx bx-mail-send'></i>
-                                <p>-> Fone / Whatsapp: <a href="https://wa.me/555191657516" target="_blank">(51) 9 9165-7516</a></p>
+                                <i class='bx bxl-whatsapp'></i>
+                                <p>-> Whatsapp: <a href="https://wa.me/555191657516" target="_blank">(51) 9 9165-7516</a></p>
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
+    </section>
 
     <script>
         const body = document.querySelector('body'),

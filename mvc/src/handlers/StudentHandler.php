@@ -17,10 +17,35 @@ class StudentHandler {
         return $student ? true : false;
     }
 
-    public static function addStudent ($class, $studentName, $studentNumber) {
-        if ($class && $studentName && $studentNumber) {
+    public static function addStudent ($class, $studentName, $studentNumber, $outPeriod) {
+        if ($class && $studentName && $studentNumber) {        
 
+            $situationOut = 'Banheiro';
+
+            Student::insert([
+                'class_code' => $class,
+                'name' => $studentName,
+                'student_number' => $studentNumber,
+                'out_period' => $outPeriod,
+                'situation' => $situationOut
+            ])->execute();
+            
+            $classExist = Classroom::select()->where('code', $class)->one();
+
+            if (empty($classExist)) {
+                Classroom::insert([
+                    'code' => $class
+                ])->execute();
+            }
+            
+            
+        }
+    }
+
+    public static function checkPeriod () {
+        date_default_timezone_set('America/Sao_Paulo');
             $outPeriod = date('H:i:s');
+
 
             //Morning Periods
             $morningPeriod1S = mktime(7,30,00);
@@ -50,7 +75,7 @@ class StudentHandler {
             $afternoonPeriod2F = mktime(14,39,59);
 
             $afternoonPeriod3S = mktime(14,40,00);
-            $afternoonPeriod3F = mktime(15,30,00);
+            $afternoonPeriod3F = mktime(15,29,59);
 
             $afternoonPeriod4S = mktime(15,30,00);
             $afternoonPeriod4F = mktime(16,19,59);
@@ -99,42 +124,23 @@ class StudentHandler {
             else if (strtotime($outPeriod) >= $morningPeriod6S && strtotime($outPeriod) <= $morningPeriod6F) {
                 $outPeriod = '6º';
             }
-            
 
-            $situationOut = 'Banheiro';
-
-            Student::insert([
-                'class_code' => $class,
-                'name' => $studentName,
-                'student_number' => $studentNumber,
-                'out_period' => $outPeriod,
-                'situation' => $situationOut
-            ])->execute();
-            
-            $classExist = Classroom::select()->where('code', $class)->one();
-
-            if (empty($classExist)) {
-                Classroom::insert([
-                    'code' => $class
-                ])->execute();
-            }
-            
-            
-        }
+            return $outPeriod;
     }
 
-    public static function addExit ($studentNumber) {
+    public static function updateExitPeriod ($studentNumber, $period) {
         if ($studentNumber) {
             $situationOut = 'Banheiro';
             $student = Student::update()
                 ->set('situation', $situationOut)
+                ->set('out_period', $period)
                 ->where('student_number', $studentNumber)
             ->execute();
 
         }
     }
 
-    public static function changeSituation ($id) {
+    /*public static function changeSituation ($id) {
         if ($id) {
             $situationIn = 'Dentro de sala';
             Student::update()
@@ -148,7 +154,7 @@ class StudentHandler {
         else {
             return false;
         }
-    }
+    }*/
 
     public static function deleteStudent ($id) {
         if ($id) {
