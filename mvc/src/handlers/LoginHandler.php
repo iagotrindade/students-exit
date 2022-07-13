@@ -22,7 +22,6 @@ class LoginHandler {
                 return $loggedUser;
             }
         }
-
         return false;
     }
 
