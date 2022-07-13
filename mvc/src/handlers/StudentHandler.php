@@ -117,7 +117,6 @@ class StudentHandler {
             else if (strtotime($outPeriod) >= $morningPeriod6S && strtotime($outPeriod) <= $morningPeriod6F) {
                 $outPeriod = '6º';
             }
-<<<<<<< HEAD
 
             return $outPeriod;
     }
@@ -136,13 +135,10 @@ class StudentHandler {
             ])->execute();
             
             $classExist = Classroom::select()->where('code', $class)->one();
-=======
->>>>>>> fa359b6484fb77bf52ea33d46d9f7d9735b195ee
 
             return $outPeriod;
     }
 
-<<<<<<< HEAD
     public static function addExit ($id, $period) {
         if ($id) {
 
@@ -150,15 +146,6 @@ class StudentHandler {
                 ->set('situation', 'Banheiro')
                 ->set('out_period', $period)
                 ->where('id', $id)
-=======
-    public static function updateExitPeriod ($studentNumber, $period) {
-        if ($studentNumber) {
-            $situationOut = 'Banheiro';
-            $student = Student::update()
-                ->set('situation', $situationOut)
-                ->set('out_period', $period)
-                ->where('student_number', $studentNumber)
->>>>>>> fa359b6484fb77bf52ea33d46d9f7d9735b195ee
             ->execute();
 
         }
