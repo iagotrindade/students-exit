@@ -709,3 +709,118 @@ section{
 .list-about-spec p a:hover {
     border-bottom: 1px solid #695CFE;
 }
+
+@media (max-width: 725px) {
+    .section-area-about {
+        width: 100%;
+        height: auto;
+    }
+
+    .section-area-about-modal {
+        flex-direction: column;
+    }
+
+    .picture-area-img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .text-area {
+        width: auto;
+        margin: 10px;
+    }
+
+    .list-about-item {
+        margin-bottom: 10px;
+        padding: 5px 2px;
+        font-size: 12px;
+    }
+
+    .list-about-spec i {
+        margin-right: 5px;
+    }
+}
+
+@media (max-width: 545px) {
+    .login-modal-area {
+        width: 90vw;
+    }
+
+    .login-form input {
+        width: auto;
+    }
+
+    .create-account-link, .recover-password-link {
+        font-size: 12px;
+    }
+
+    h1 {
+        font-size: 16px;
+    }
+
+    .header-buttons {
+        flex-direction: column;
+    }
+
+    .filter-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .filter-form select {
+        padding: 10px 10px;
+    }
+
+    .add-button {
+        text-align: left;
+        width: 100%;
+        margin: 0;
+        margin-bottom: 15px;
+    }
+
+    section {
+        margin: 25px;
+    }
+
+    .sidebar.close ~ .home {
+        left: 45px;
+        width: calc(100% - 85px)
+    }
+
+    .sidebar.close {
+        width: 58px;
+    }
+
+    .sidebar {
+        padding: 10px 0px;
+    }
+
+    .add-student-modal {
+        padding: 25px 0;
+    }
+
+    .add-student-form-area {
+        width: auto;
+    }
+
+    .add-student-form {
+        width: 100%;
+    }
+
+    .add-student-form input {
+        font-size: 12px;
+        height: 35px;
+        width: auto;
+    }
+
+    .add-button-submit, .add-button-close {
+        font-size: 12px;
+        height: 35px;
+        padding: 0;
+    }
+
+    th, td {
+        font-size: 10px;
+        padding: 10px;
+    }
+  }

@@ -6,5 +6,4 @@ use \core\Controller;
 class ClassroomController extends Controller {
 
     
-
 }

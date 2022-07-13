@@ -10,17 +10,35 @@ class StudentHandler {
     
     public static function studentExists ($studentNumber, $class) {
 
-        $student = Student::select()->where('student_number', $studentNumber)->one();
+        $studentsList = Student::select()->where('class_code', $class)->get();
+        $students = [];
 
+        foreach($studentsList as $student) {
+            $newStudent = new Student();
+            $newStudent->id = $student['id'];
+            $newStudent->studentNumber = $student['student_number']; 
+            $newStudent->classNumber = $student['class_code']; 
 
-        
-        return $student ? true : false;
+            if($student['student_number'] == $studentNumber) {
+                $found = $student['id'];
+            }
+
+            $students[] = $newStudent;
+        }
+
+        if(!empty($found)) {
+            return $found;
+        }
+
+        else {
+            return false;
+        }
     }
 
-    public static function addStudent ($class, $studentName, $studentNumber) {
-        if ($class && $studentName && $studentNumber) {
-
+    public static function checkPeriod () {
+        date_default_timezone_set('America/Sao_Paulo');
             $outPeriod = date('H:i:s');
+
 
             //Morning Periods
             $morningPeriod1S = mktime(7,30,00);
@@ -50,7 +68,7 @@ class StudentHandler {
             $afternoonPeriod2F = mktime(14,39,59);
 
             $afternoonPeriod3S = mktime(14,40,00);
-            $afternoonPeriod3F = mktime(15,30,00);
+            $afternoonPeriod3F = mktime(15,29,59);
 
             $afternoonPeriod4S = mktime(15,30,00);
             $afternoonPeriod4F = mktime(16,19,59);
@@ -99,7 +117,12 @@ class StudentHandler {
             else if (strtotime($outPeriod) >= $morningPeriod6S && strtotime($outPeriod) <= $morningPeriod6F) {
                 $outPeriod = '6º';
             }
-            
+
+            return $outPeriod;
+    }
+
+    public static function addStudent ($class, $studentName, $studentNumber, $period) {
+        if ($class && $studentName && $studentNumber) {
 
             $situationOut = 'Banheiro';
 
@@ -107,7 +130,7 @@ class StudentHandler {
                 'class_code' => $class,
                 'name' => $studentName,
                 'student_number' => $studentNumber,
-                'out_period' => $outPeriod,
+                'out_period' => $period,
                 'situation' => $situationOut
             ])->execute();
             
@@ -123,12 +146,13 @@ class StudentHandler {
         }
     }
 
-    public static function addExit ($studentNumber) {
-        if ($studentNumber) {
-            $situationOut = 'Banheiro';
+    public static function addExit ($id, $period) {
+        if ($id) {
+
             $student = Student::update()
-                ->set('situation', $situationOut)
-                ->where('student_number', $studentNumber)
+                ->set('situation', 'Banheiro')
+                ->set('out_period', $period)
+                ->where('id', $id)
             ->execute();
 
         }

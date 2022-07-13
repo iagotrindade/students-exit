@@ -11,16 +11,20 @@ class StudentController extends Controller {
         $studentNumber = filter_input(INPUT_POST, 'student_number');
 
         if ($class && $studentName && $studentNumber) {
-            if (StudentHandler::studentExists($studentNumber, $class) === false) {
+            $found = StudentHandler::studentExists($studentNumber, $class);
+            if ($found === false) {
+                $period = StudentHandler::checkPeriod();
 
-                StudentHandler::addStudent($class, $studentName, $studentNumber);
+                StudentHandler::addStudent($class, $studentName, $studentNumber, $period);
 
                 $_SESSION['flashSuccess'] = 'Saída cadastrada com sucesso!';
                 $this->redirect('/');
             }
 
             else {
-                StudentHandler::addExit($studentNumber);
+                $period = StudentHandler::checkPeriod();
+
+                StudentHandler::addExit($found, $period);
 
                 $_SESSION['flashSuccess'] = 'Saída cadastrada com sucesso!';
                 $this->redirect('/');
@@ -33,6 +37,7 @@ class StudentController extends Controller {
         }
     }
 
+    /*Função removida a pedido do usuário 
     public function studentreturn ($id) {
         if ($id) {
             $situation = StudentHandler::changeSituation($id);
@@ -52,6 +57,7 @@ class StudentController extends Controller {
                 $this->redirect('/');
         }
     }
+    */
 
     public function delete ($id) {
         if ($id) {

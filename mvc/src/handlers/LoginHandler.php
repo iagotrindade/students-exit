@@ -88,7 +88,7 @@ class LoginHandler {
                 
             }
 
-            $recoverLink = 'http://localhost/students-exit/mvc/public/token='.$token.'/recover';
+            $recoverLink = '192.168.1.64/students-exit/mvc/public/token='.$token.'/recover';
 
 
             $para  = $email; 

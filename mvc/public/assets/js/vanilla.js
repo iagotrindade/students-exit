@@ -1,3 +1,11 @@
+function confirmDel() {
+    return confirm('Tem certeza que deseja excluir este aluno?');
+}
+
+function confirmExit() {
+    return confirm('Tem certeza que sair da sua conta?');
+}
+
 function openModal () {
     let modal = document.querySelector('.add-student-section');
     
