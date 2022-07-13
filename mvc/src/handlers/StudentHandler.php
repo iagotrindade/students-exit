@@ -137,8 +137,9 @@ class StudentHandler {
             $classExist = Classroom::select()->where('code', $class)->one();
 
             return $outPeriod;
+        }
     }
-
+    
     public static function addExit ($id, $period) {
         if ($id) {
 

@@ -82,14 +82,8 @@
                                     <!--<a href="<?=$base;?>/<?=$student->id?>/return" class="action-button">
                                         <p>Retorno</p> <i class='bx bx-check act-icon'></i>
                                     </a>
-<<<<<<< HEAD
                                     /-->
 
-=======
-
-                                    /-->
-
->>>>>>> fa359b6484fb77bf52ea33d46d9f7d9735b195ee
                                     <a href="<?=$base;?>/<?=$student->id?>/delete" class="action-button" onclick='return confirmDel()'>
                                         <p>Excluir</p> <i class='bx bx-x act-icon'></i>
                                     </a>
